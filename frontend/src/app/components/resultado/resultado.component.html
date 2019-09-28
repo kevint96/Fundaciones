@@ -1,0 +1,321 @@
+<div class="card" style="background-color: #343a40!important; color: white">
+    <div class="card-header" align="center">
+        <h5 align="center">Resultados</h5>
+    </div>
+</div>
+
+<div class="card">
+    <h6 id="mensaje" align="center">Actualmente no hay ningun resultado guardado!:</h6>
+    <div class="container">
+        <div id="div1" *ngFor="let item of resultados;let i=index">
+            <!-- <div class="container" *ngFor="let item of resultados;let i=index"> -->
+            <br>
+            <a href="#resultados-{{ i }}" class="btn btn-info" data-toggle="collapse" (click)="bajar(i)">Resultado #
+                {{i + 1}}</a>
+            <br>
+            <div id="resultados-{{ i }}" class="collapse table-responsive table small">
+                <div id="resulta-{{ i }}">
+                    <br>
+                    <button id="Cerrar" (click)="cerrar(i)" type="button"
+                                        class="btn btn-danger btn-sm">Cerrar</button>
+                    <h6 align="center" style="color: blue">Datos inciciales</h6>
+                    <table id="tabla1-{{ i }}" class="table table-bordered">
+                        <thead class="thead-dark" style="text-align: center">
+                            <tr>
+                                <th scope="col">Peso Suelo</th>
+                                <th scope="col">Peso concreto</th>
+                                <th scope="col">Area acero</th>
+                                <th scope="col">Peso especifico concreto</th>
+                                <th scope="col">Carga viva</th>
+                                <th scope="col">Carga muerta</th>
+                                <th scope="col">Carga admisible suelo</th>
+                                <th scope="col">Factor mayoracion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{Redondeo(resultados[i].pesoSuelo,4)}}</td>
+                                <td>{{Redondeo(resultados[i].pesoConcreto,4)}}</td>
+                                <td>{{Redondeo(resultados[i].diametroAcero,4)}}</td>
+                                <td>{{Redondeo(resultados[i].pesoZapata,4)}}</td>
+                                <td>{{Redondeo(resultados[i].cargaViva,4)}}</td>
+                                <td>{{Redondeo(resultados[i].cargaMuerta,4)}}</td>
+                                <td>{{Redondeo(resultados[i].cargaAdmisibleSuelo,4)}}</td>
+                                <td>{{Redondeo(resultados[i].factorMayoracion,4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Fuerzas etabs</h6>
+                    <table id="tabla2-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead class="thead-dark" style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">Fx</th>
+                                <th scope="col">Fy</th>
+                                <th scope="col">Fz</th>
+                                <th scope="col">Mx</th>
+                                <th scope="col">My</th>
+                                <th scope="col">Mz</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].fx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].fy[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].fz[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].mx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].my[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].mz[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Bases</h6>
+                    <table id="tabla3-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead class="thead-dark"style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">Bx</th>
+                                <th scope="col">By</th>
+                                <th scope="col">E</th>
+                                <th scope="col">Cx</th>
+                                <th scope="col">Cy</th>
+                                <th scope="col">H</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].bx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].by[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].e[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].cx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].cy[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].h[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Resultados zapata 1</h6>
+                    <table id="tabla4-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead class="thead-dark" style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">Peso zapata</th>
+                                <th scope="col">Peso pedestal</th>
+                                <th scope="col">Peso suelo</th>
+                                <th scope="col">Carga vertical</th>
+                                <th scope="col">MX</th>
+                                <th scope="col">MY</th>
+                                <th scope="col">A</th>
+                                <th scope="col">LY</th>
+                                <th scope="col">QMax</th>
+                                <th scope="col">QMin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].listaPesoZapata[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].listaPesoPedestal[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].listaPesoSuelo[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].listaCargaVertical[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].listaMomentoActuanteMX[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].listaMomentoActuanteMY[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].A[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Ly[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].QMax[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].QMin[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Resultados zapata 2</h6>
+                    <table id="tabla5-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">Mdx</th>
+                                <th scope="col">Mdy</th>
+                                <th scope="col">Ax</th>
+                                <th scope="col">Ay</th>
+                                <th scope="col">Asx</th>
+                                <th scope="col">Asy</th>
+                                <th scope="col">Vx</th>
+                                <th scope="col">Vy</th>
+                                <th scope="col">Vc</th>
+                                <th scope="col">Vpuz</th>
+                                <th scope="col">Vcon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].Mdx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Mdy[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Ax[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Ay[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Asx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Asy[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Vx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Vy[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Vc[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Vpuz[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].Vcon[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Datos iniciales pedestal </h6>
+                    <table id="tabla6-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">F'c</th>
+                                <th scope="col">R</th>
+                                <th scope="col">Peso concreto</th>
+                                <th scope="col">E</th>
+                                <th scope="col">Cx</th>
+                                <th scope="col">Cy</th>
+                                <th scope="col">H</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].pedestal_fc[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_r[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_pesoConcreto[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_e[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_cx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_cy[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_h[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Resultados pedestal 1</h6>
+                    <table id="tabla7-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">Peso pedestal</th>
+                                <th scope="col">Carga vertical</th>
+                                <th scope="col">Mx</th>
+                                <th scope="col">My</th>
+                                <th scope="col">Relacion recubrimiento</th>
+                                <th scope="col">Carga adimensional</th>
+                                <th scope="col">Momento adimensional X</th>
+                                <th scope="col">Momento adimensional Y</th>
+                                <th scope="col">Condicional X</th>
+                                <th scope="col">Condicional Y</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].pedestal_pesoPedestal[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_cargaVerticalTotal[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_Mx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_My[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_relacionRecubrimiento[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_cargaAdimensional[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_momentoAdimensionalX[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_momentoAdimensionalY[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_condicionalesMomentoAdimensionalX[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_condicionalesMomentoAdimensionalY[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Resultados pedestal 2</h6>
+                    <table id="tabla8-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">Mediatriz Am</th>
+                                <th scope="col">Mediatriz Tm</th>
+                                <th scope="col">Mediatriz Bm</th>
+                                <th scope="col">Diagonal Ad</th>
+                                <th scope="col">Diagonal Td</th>
+                                <th scope="col">Diagonal Bd</th>
+                                <th scope="col">K1</th>
+                                <th scope="col">K2</th>
+                                <th scope="col">K3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].pedestal_mediatrizAm[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_mediatrizTm[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_mediatrizBm[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_diagonalAd[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_diagonalTd[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_diagonalBd[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_coeficienteK1[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_coeficienteK2[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_coeficienteK3[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6 align="center" style="color: blue">Resultados pedestal 3</h6>
+                    <table id="tabla9-{{ i }}" class="table table-bordered" style="text-align: center">
+                        <thead class="thead-dark" style="text-align: center">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">Cuantia requerida</th>
+                                <th scope="col">Cuantia geometrica</th>
+                                <th scope="col">Area longitudinal</th>
+                                <th scope="col">Separacion norma</th>
+                                <th scope="col">Area pedestal</th>
+                                <th scope="col">Area refuerzo</th>
+                                <th scope="col">Ashx</th>
+                                <th scope="col">Ashy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of resultados[i].fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(resultados[i].pedestal_cuantiaRequerida[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_cuantiaGeometrica[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_areaLongitudinal[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_separacionNorma[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_areaPedestal[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_areaRefuerzo[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_seccionTransversalAshx[indice],4)}}</td>
+                                <td>{{Redondeo(resultados[i].pedestal_seccionTransversalAshy[indice],4)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- <canvas #canvas style="background-color: white" width="862" height="540" id="micanvas"></canvas> -->
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="btn-group btn-group-lg" role="group" aria-label="...">
+
+                                <div class="btn-group">
+                                    <button id="" (click)="imprimirElemento()" type="button"
+                                        class="btn btn-info btn-lg">Imprimir</button>
+
+                                    <button id="" (click)="prueba()" type="button"
+                                        class="btn btn-warning btn-lg">Guardar como Pdf</button>
+                                    
+                                    <button id="" type="button" (click)="eliminarResultado()"
+                                        class="btn btn-danger btn-lg">Eliminar</button>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

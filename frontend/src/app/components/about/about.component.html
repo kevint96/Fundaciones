@@ -1,0 +1,258 @@
+<!-- Menu de navegación para las zapatas aisladas -->
+<div class="row" id="contenido">
+    <div class="col-sm-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">
+                <h5 align="center">Diseño de fundaciones</h5>
+            </div>
+            <div class="card-body">
+
+                <form #employeeForm="ngForm" (ngSubmit)="add(employeeForm)">
+                    <h6 align="center" style="color: white;">Datos principales</h6>
+
+                    <div class="row">
+
+                        <!-- 1 Grupo de etiqueta e input suelo -->
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="pesoSuelo">Peso del suelo: (kg/m3)</label>
+                                <input type="number" class="form-control" id="pesoSuelo" ngModel name="pesoSuelo"
+                                    #pesoSuelo="ngModel" required="true"
+                                    [(ngModel)]="zapatasService.selectedZapata.pesoSuelo" value="{{pesoSuelo}}" (ngModelChange)="inputCambian()" placeholder="2000">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="pesoSuelo.touched && !pesoSuelo.valid">El peso del suelo es requerido!</div>
+                            </div>
+                        </div>
+
+                        <!-- 2 Grupo de etiqueta e input concreto -->
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="fyconcreto">Resistencia u. Acero: (kg/m2)</label>
+                                <input name="fyconcreto" type="number" class="form-control" id="fyconcreto" readonly
+                                    value="4200">
+                            </div>
+                        </div>
+
+                        <!-- 3 Grupo de etiqueta e input concreto -->
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="pesoConcreto">F’c del concreto: (kg/cm2)</label>
+                                <input type="number" class="form-control" id="pesoConcreto" ngModel name="pesoConcreto"
+                                    #pesoConcreto="ngModel" required="true"
+                                    [(ngModel)]="zapatasService.selectedZapata.pesoConcreto" value="{{pesoConcreto}}" (ngModelChange)="inputCambian()"  placeholder="214,14">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="pesoConcreto.touched && !pesoConcreto.valid">El peso del concreto es
+                                    requerido!</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 Grupo de etiqueta e input diametro acero -->
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="barras">Barras número: (#)</label>
+                                <select class="browser-default custom-select" id="barras" ngModel name="barras" ngModel
+                                    #barras="ngModel" (ngModelChange)="inputBarra()">
+                                    <option>Barra número</option>
+                                    <option value="0.32">2</option>
+                                    <option value="0.71">3</option>
+                                    <option value="1.27">4</option>
+                                    <option selected="true" value="1.98">5</option>
+                                    <option value="2.87">6</option>
+                                    <option value="3.87">7</option>
+                                    <option value="5.07">8</option>
+                                    <option value="6.42">9</option>
+                                    <option value="7.94">10</option>
+                                    <option value="9.57">11</option>
+                                    <option value="11.40">12</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="diametroAcero">Area del acero: (Cm2)</label>
+                                <input type="number" class="form-control" id="diametroAcero" ngModel
+                                    name="diametroAcero" ngModel #diametroAcero="ngModel" required="true"
+                                    [(ngModel)]="zapatasService.selectedZapata.diametroAcero" value="{{barras.value}}" (ngModelChange)="inputCambian()"  placeholder="1,98">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="diametroAcero.touched && !diametroAcero.valid">El area del acero es
+                                    requerido!</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 Grupo de etiqueta e input peso zapata -->
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="pesoZapata">Peso especifico concreto: (kg)</label>
+                                <input type="number" class="form-control" id="pesoZapata" ngModel name="pesoZapata"
+                                    ngModel #pesoZapata="ngModel" required="true"
+                                    [(ngModel)]="zapatasService.selectedZapata.pesoZapata" value="{{pesoZapata}}" (ngModelChange)="inputCambian()"  placeholder="2400">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="pesoZapata.touched && !pesoZapata.valid">El peso del concreto es requerido!
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- 7 Grupo de etiqueta e input Carga admisible suelo -->
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="cargaAdmisibleSuelo">Carga admisible suelo: (Kg/m2)</label>
+                                <input type="number" class="form-control" id="cargaAdmisibleSuelo" ngModel
+                                    name="cargaAdmisibleSuelo" ngModel #cargaAdmisibleSuelo="ngModel" required="true"
+                                    [(ngModel)]="zapatasService.selectedZapata.cargaAdmisibleSuelo"
+                                    value="{{cargaAdmisibleSuelo}}" (ngModelChange)="inputCambian()"  placeholder="20394">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="cargaAdmisibleSuelo.touched && !cargaAdmisibleSuelo.valid">La carga admisible
+                                    es requerida!</div>
+                            </div>
+                        </div>
+
+                        <!-- 5 Grupo de etiqueta e input Carga viva edificación -->
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="cargaViva">Carga axial (Viva): (Kn)</label>
+                                <input type="number" class="form-control" id="cargaViva" ngModel name="cargaViva"
+                                    ngModel #cargaViva="ngModel" required="true"
+                                    [(ngModel)]="zapatasService.selectedZapata.cargaViva" value="{{cargaViva}}" (ngModelChange)="inputCambian()"  placeholder="600">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="cargaViva.touched && !cargaViva.valid">La carga axial (Viva) es requerida!</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- 9 Grupo de etiqueta e input Factor mayoracion usuario -->
+
+                    <div class="row">
+
+                        <!-- 6 Grupo de etiqueta e input Carga muerta edificación -->
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="cargaMuerta">Carga axial (Muerta): (Kn)</label>
+                                <input type="number" class="form-control" id="cargaMuerta" ngModel name="cargaMuerta"
+                                    ngModel #cargaMuerta="ngModel" required="true"
+                                    [(ngModel)]="zapatasService.selectedZapata.cargaMuerta" value="{{cargaMuerta}}" (ngModelChange)="inputCambian()"  placeholder="800">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="cargaMuerta.touched && !cargaMuerta.valid">La carga axial (Muerta) es requerida!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8 Grupo de etiqueta e input factor mayoracion -->
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="factorMayoracion">Factor mayoracion:</label>
+                                <input type="number" class="form-control" id="factorMayoracion" ngModel
+                                    name="factorMayoracion" ngModel #factorMayoracion="ngModel" required="true"
+                                    ngModel="{{((1.6 * (cargaViva.value / cargaMuerta.value )) + 1.2) / (( cargaViva.value / cargaMuerta.value) + 1)}}"
+                                    value="{{factorMayoracion}}" readonly>
+                                <!-- <div class="alert alert-danger" role="alert" *ngIf="factorMayoracion.valid">El factor de mayoracion es requerido!</div> -->
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="factorMayoracionUsuario">Factor mayoración usuario:</label>
+                                <input type="number" class="form-control" id="factorMayoracionUsuario" ngModel
+                                    name="factorMayoracionUsuario" ngModel #factorMayoracionUsuario="ngModel"
+                                    required="true" [(ngModel)]="zapatasService.selectedZapata.factorMayoracionUsuario"
+                                    value="{{factorMayoracionUsuario}}" (ngModelChange)="inputCambian()"  placeholder="1,55">
+                                <div class="alert alert-danger" role="alert"
+                                    *ngIf="factorMayoracionUsuario.touched && !factorMayoracionUsuario.valid">El factor de mayoracion es requerido!</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary" align="center">
+                            <!-- <div class="container"> -->
+                            <br>
+
+                            <div class="btn-group">
+
+                                <!-- <div class="btn-group"> -->
+                                <button type="submit" class="btn btn-success btn-lg"
+                                    [disabled]="employeeForm.invalid">Asignar</button>
+
+                                <button type="reset" class="btn btn-warning btn-lg">Limpiar</button>
+                                <!-- <button type="button" class="btn btn-danger btn-lg"
+                                        routerLink="/home">Aceptar</button>
+                                    <button type="button" class="btn btn-warning btn-lg">Cancelar</button> -->
+                            </div>
+                        </div>
+                        <!-- </div> -->
+
+                    </div>
+                </form>
+
+                <!-- <div class="col-6" align="center">
+                            <br>
+                            <div class="form-group">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-lg"
+                                    (click)="resetForm(employeeForm)">Nuevo</button>
+                                <button type="button" class="btn btn-secondary btn-lg">Modificar</button>
+                                <button type="button" class="btn btn-primary btn-lg">Eliminar</button>
+                            </div>
+                        </div>
+                        </div> -->
+            </div>
+
+
+
+            <!-- <app-home></app-home>
+
+                pesoSuelo: {{pesoSuelo.value}}<br>
+                factorMayoracion: {{factorMayoracion.value}}<br>
+                pesoConcreto: {{pesoConcreto.className}} <br>
+                formulario: {{title}} <br>
+                cargaViva: {{cargaViva.value + cargaMuerta.value}} <br>
+                cargaMuerta: {{cargaMuerta.value}} <br>
+                {{final}}:
+                {{((1.6 * (cargaViva.value / cargaMuerta.value )) + 1.2) / (( cargaViva.value / cargaMuerta.value) + 1)}} -->
+        </div>
+    </div>
+
+    <!-- <button type="button" class="btn btn-primary" (click)="enviar(nombreModal)">Abrir</button>
+        <ng-template #nombreModal let-c="close" let-d="dismiss">
+            <div class="modal-header">Cabecera
+                <button type="button" class="close" (click)="c('')">X</button>
+            </div>
+            <div class="modal-body">
+                <app-home></app-home>
+                pesoSuelo: {{pesoSuelo.value}}<br>
+                factorMayoracion: {{factorMayoracion.value}}<br>
+                pesoConcreto: {{pesoConcreto.className}} <br>
+                formulario: {{title}} <br>
+                cargaViva: {{cargaViva.value + cargaMuerta.value}} <br>
+                cargaMuerta: {{cargaMuerta.value}} <br>
+                {{final}}:
+                {{((1.6 * (cargaViva.value / cargaMuerta.value )) + 1.2) / (( cargaViva.value / cargaMuerta.value) + 1)}}
+                <input type="number" class="form-control" id="factorMayoracionUsuario" ngModel
+                    name="factorMayoracionUsuario" ngModel #factorMayoracionUsuario="ngModel" required="true"
+                    [(ngModel)]="zapatasService.selectedZapata.factorMayoracionUsuario">
+            </div>
+        </ng-template> -->
+
+
+</div>
+
+
+
+
+<!-- <div class="col-sm-12" align="center">
+        <app-home></app-home>
+    </div> -->

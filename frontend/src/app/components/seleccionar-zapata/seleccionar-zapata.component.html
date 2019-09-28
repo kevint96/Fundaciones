@@ -1,0 +1,77 @@
+<!-- Menu de navegación para las zapatas aisladas -->
+<div class="row" id="contenido">
+    <div class="col-sm-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">
+                <h5 align="center">Lista de zapatas:</h5>
+            </div>
+            <div class="card-body">
+                <!-- <h6 align="center">Seleccione la zapata:</h6> -->
+
+                <h6 id="mensaje" align="center"></h6>
+            </div>
+
+            <div class="card">
+                <div class="container">
+                    <div class="table-responsive table small" id="div1" *ngFor="let item of zapatas;let i=index">
+                        <!-- <div class="container" *ngFor="let item of zapatas;let i=index"> -->
+                        <br>
+                        <a href="#zapatas-{{ i }}" class="btn btn-info" data-toggle="collapse" (click)="bajar(i)">Zapata
+                            #
+                            {{i + 1}}</a>
+                        <br>
+                        <div id="zapatas-{{ i }}" class="collapse">
+                            <br>
+                            <table class="table table-active" style="text-align: center">
+                                <thead class="thead-dark" style="text-align: center">
+                                    <tr>
+                                        <th scope="col">Peso Suelo</th>
+                                        <th scope="col">Peso concreto</th>
+                                        <th scope="col">Area acero</th>
+                                        <th scope="col">Peso especifico concreto</th>
+                                        <th scope="col">Carga viva</th>
+                                        <th scope="col">Carga muerta</th>
+                                        <th scope="col">Carga admisible suelo</th>
+                                        <th scope="col">Factor mayoracion</th>
+                                        <th scope="col">Factor mayoracion usuario</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{zapatas[i].pesoSuelo}}</td>
+                                        <td>{{zapatas[i].pesoConcreto}}</td>
+                                        <td>{{zapatas[i].diametroAcero}}</td>
+                                        <td>{{zapatas[i].pesoZapata}}</td>
+                                        <td>{{zapatas[i].cargaViva}}</td>
+                                        <td>{{zapatas[i].cargaMuerta}}</td>
+                                        <td>{{zapatas[i].cargaAdmisibleSuelo}}</td>
+                                        <td>{{zapatas[i].factorMayoracion}}</td>
+                                        <td>{{zapatas[i].factorMayoracionUsuario}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success btn-lg btn-block" style="text-align: center"
+                                                    (click)="seleccionar(i)">Seleccionar</button>
+                                                
+                                                <button id="" type="button" (click)="eliminarZapata()"
+                                                    class="btn btn-danger btn-lg">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,457 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">
+                <h5 align="center">Dimensiones y bases pedestal</h5>
+            </div>
+            <div class="card-body">
+
+                <form #basesForm="ngForm">
+                    <!-- <h6 align="center" style="color: white;">Zapata</h6> -->
+
+                    <div class="row" style="text-align: center">
+
+                        <div class="col-12 col-md-6 col-lg-4 bg-primary">
+                            <div class="form-group">
+                                <label for="Concreto">F'c <br> (Kg/cm2):</label>
+                                <input type="number" class="form-control" id="Concreto" value="{{pesoConcreto}}">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-4 bg-primary">
+                            <div class="form-group">
+                                <label for="Rec">Recubrimiento <br> (cm):</label>
+                                <input type="number" class="form-control" id="Rec">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-4 bg-primary">
+                            <div class="form-group">
+                                <label for="pesoZapata">Peso <br> concreto (kg):</label>
+                                <input type="number" class="form-control" id="pesoConcreto" value="{{pesoZapata}}"
+                                    readonly>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card-body">
+
+
+                    </div>
+                    <!-- [disabled]="habilitado()" -->
+
+                    <!-- <button style="text-align: right;width:220px" type="button" class="btn btn-primary btn-lg" (click)="darListaExcel()">Lista</button> -->
+
+                </form>
+
+                <div class="table-responsive table small" id="div1">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">FX</th>
+                                <th scope="col">FY</th>
+                                <th scope="col">FZ</th>
+                                <th scope="col">MX</th>
+                                <th scope="col">MY</th>
+                                <th scope="col">MZ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{item}}</td>
+                                <td>{{fy[indice]}}</td>
+                                <td>{{fz[indice]}}</td>
+                                <td>{{mx[indice]}}</td>
+                                <td>{{my[indice]}}</td>
+                                <td>{{mz[indice]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+                <h5 align="center">Datos supuestos por el usuario</h5>
+
+                <!-- <h6 align="center">Es importante considerar que para los datos supuestos por el usuario el espesor escogido 
+                        no debe ser menor a 0,25 metros según el reglamento técnico colombiano NSR-10.</h6> -->
+
+                <div class="table-responsive table small" id="div2">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">E(m)</th>
+                                <th scope="col">CX(m)</th>
+                                <th scope="col">CY(m)</th>
+                                <th scope="col">H(m)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of cx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td contenteditable></td>
+                                <td contenteditable id="CxTabla">{{cx[indice]}}</td>
+                                <td contenteditable id="CyTabla">{{cy[indice]}}</td>
+                                <td contenteditable id="HTabla">{{h[indice]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="btn-group btn-group-lg" role="group" aria-label="...">
+
+                                <!-- <button id="cargarDatos" type="button" class="btn btn-info btn-lg"
+                                    (click)="darBases()">Cargar datos</button> -->
+
+                                <button id="diseñar" type="button" class="btn btn-success btn-lg"
+                                    (click)="myFunction()">Diseñar</button>
+
+                                <!-- [disabled]="habilitado()" -->
+
+                                <button id="limpiar" type="button" class="btn btn-warning btn-lg"
+                                    (click)="limpiar()">Limpiar</button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+
+                </div>
+
+
+                <div class="table-responsive table small" id="div3">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th colspan="1" scope="col">Peso Pedestal</th>
+                                <th colspan="1" scope="col">Carga vertical Total</th>
+                                <th colspan="2" scope="col">Momentos actuantes </th>
+                                <th colspan="1" scope="col">Relacion de recubrimiento y</th>
+                                <th colspan="1" scope="col">Carga adimensional u</th>
+                                <th colspan="1" scope="col">Momento x Ux</th>
+                                <th colspan="1" scope="col">Momento y Uy</th>
+                                <th colspan="2" scope="col">Condicionales momento adimensional</th>
+                                <th colspan="3" scope="col">Mediatriz Adimensional</th>
+                                <th colspan="3" scope="col">Diagonal Adimensional</th>
+                                <th colspan="3" scope="col">Coeficientes cuantia mínima Adimensional</th>
+                                <th colspan="1" scope="col">Cuantia requerida W</th>
+                                <th colspan="1" scope="col">Cuantia geometrica P</th>
+                                <th colspan="1" scope="col">Area refuerzo longitudinal Cm2</th>
+                                <th colspan="1" scope="col">Separación por norma Cm</th>
+                                <th colspan="1" scope="col">Area pedestal Cm2</th>
+                                <th colspan="1" scope="col">Area refuerzo Cm2</th>
+                                <th colspan="2" scope="col">Area seccion transversal Cm2 </th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Kg</th>
+                                <th scope="col">Kg</th>
+                                <th scope="col">MX</th>
+                                <th scope="col">MY</th>
+                                <th scope="col">Adimensional</th>
+                                <th scope="col">Adimensional</th>
+                                <th scope="col">Adimensional</th>
+                                <th scope="col">Adimensional</th>
+                                <th scope="col">X</th>
+                                <th scope="col">Y</th>
+                                <th scope="col">Am</th>
+                                <th scope="col">Tm</th>
+                                <th scope="col">Bm</th>
+                                <th scope="col">Ad</th>
+                                <th scope="col">Td</th>
+                                <th scope="col">Bd</th>
+                                <th scope="col">K1</th>
+                                <th scope="col">K2</th>
+                                <th scope="col">K3</th>
+                                <th scope="col">Adimensional</th>
+                                <th scope="col">Adimensional</th>
+                                <th scope="col">Ast</th>
+                                <th scope="col">S</th>
+                                <th scope="col">A</th>
+                                <th scope="col">Ach</th>
+                                <th scope="col">Ashx</th>
+                                <th scope="col">Ashy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of pesoPedestal;let indice=index">
+                                <th scope="row"
+                                    [ngClass]='{red : cuantiaRequerida[indice] < 0 , blue: areaLongitudinal[i] < 0.01 * areaPedestal[i]}'>
+                                    {{base[indice]}}</th>
+                                <td>{{pesoPedestal[indice]}}</td>
+                                <td>{{cargaVerticalTotal[indice]}}</td>
+                                <td>{{Mx[indice]}}</td>
+                                <td>{{My[indice]}}</td>
+                                <td>{{relacionRecubrimiento[indice]}}</td>
+                                <td>{{cargaAdimensional[indice]}}</td>
+                                <td>{{momentoAdimensionalX[indice]}}</td>
+                                <td>{{momentoAdimensionalY[indice]}}</td>
+                                <td>{{condicionalesMomentoAdimensionalX[indice]}}</td>
+                                <td>{{condicionalesMomentoAdimensionalY[indice]}}</td>
+                                <td>{{mediatrizAm[indice]}}</td>
+                                <td>{{mediatrizTm[indice]}}</td>
+                                <td>{{mediatrizBm[indice]}}</td>
+                                <td>{{diagonalAd[indice]}}</td>
+                                <td>{{diagonalTd[indice]}}</td>
+                                <td>{{diagonalBd[indice]}}</td>
+                                <td>{{coeficienteK1[indice]}}</td>
+                                <td>{{coeficienteK2[indice]}}</td>
+                                <td>{{coeficienteK3[indice]}}</td>
+                                <td
+                                    [ngClass]='{red : cuantiaRequerida[indice] < 0, black: cuantiaRequerida[indice] > 0}'>
+                                    {{cuantiaRequerida[indice]}}</td>
+                                <td>{{cuantiaGeometrica[indice]}}</td>
+                                <td
+                                    [ngClass]='{red : areaLongitudinal[i] < 0.01 * areaPedestal[i] || areaLongitudinal[i] > 0.04 * areaPedestal[i], black: condicionAst}'>
+                                    {{areaLongitudinal[indice]}}</td>
+                                <td>{{separacionNorma[indice]}}</td>
+                                <td>{{areaPedestal[indice]}}</td>
+                                <td>{{areaRefuerzo[indice]}}</td>
+                                <td>{{seccionTransversalAshx[indice]}}</td>
+                                <td>{{seccionTransversalAshy[indice]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+
+                <!-- <div class="card-body" id="blanco">
+                        <img src="{{imagen1}}" title="ZapataAislada" alt="Zapata aislada">
+                    </div> -->
+
+                <div id="blanco">
+
+                    <br>
+
+                    <h5 style="text-align: center; color: black">Seleccione el pedestal:</h5>
+
+                    <select id="select" class="browser-default custom-select-sm" name="select" ngModel
+                        (ngModelChange)="animate2()">
+                        <option *ngFor="let item of fx;let indice=index" value="{{indice}}">{{indice + 1}} pedestal
+                        </option>
+                    </select>
+
+                    <!-- <div class="row">
+                                <div class="col-md-2" *ngFor="let item of fx;let indice=index">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-secondary" (click)="animate2(indice)">{{indice +1}}
+                                        zapata</button>
+                                </div>
+                                </div>
+        
+                            </div> -->
+
+                    <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-secondary" *ngFor="let item of fx;let indice=index"
+                                    (click)="animate2(indice)">{{indice +1}} zapata</button>
+                            </div> -->
+
+
+
+                    <!-- <ul class="List-group">
+                                <li class="list-group-item active" *ngFor="let item of fx;let indice=index">{{indice +1}}</li>
+                            </ul> -->
+
+                    <form id="resultados" style="text-align: left">
+
+                        <br>
+                        <br>
+
+                        <div class="container">
+
+                            <h2 id="numeroZapata" style="text-align: center; color: blue;">Pedestal</h2>
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Datos iniciales:</h3>
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center;">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Peso Suelo</th>
+                                            <th scope="col">Peso concreto</th>
+                                            <th scope="col">Area acero</th>
+                                            <th scope="col">Peso especifico concreto</th>
+                                            <th scope="col">Carga viva</th>
+                                            <th scope="col">Carga muerta</th>
+                                            <th scope="col">Carga admisible suelo</th>
+                                            <th scope="col">Factor mayoracion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{pesoSuelo}}</td>
+                                            <td>{{pesoConcreto}}</td>
+                                            <td>{{diametroAcero}}</td>
+                                            <td>{{pesoZapata}}</td>
+                                            <td>{{cargaViva}}</td>
+                                            <td>{{cargaMuerta}}</td>
+                                            <td>{{cargaAdmisibleSuelo}}</td>
+                                            <td>{{factorMayoracion}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <div class="container">
+
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Resultados:</h3>
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th colspan="1" scope="col">Peso Pedestal</th>
+                                            <th colspan="1" scope="col">Carga vertical Total</th>
+                                            <th colspan="1" scope="col">Momentos actuantes MX </th>
+                                            <th colspan="1" scope="col">Momentos actuantes MY </th>
+                                            <th colspan="1" scope="col">Relacion de recubrimiento y</th>
+                                            <th colspan="1" scope="col">Carga adimensional u</th>
+                                            <th colspan="1" scope="col">Momento x Ux</th>
+                                            <th colspan="1" scope="col">Momento y Uy</th>
+                                            <th colspan="1" scope="col">Condicionales momento adimensional X</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="labelPesoPedestal"></td>
+                                            <td id="labelCargaVertical"></td>
+                                            <td id="labelMomentoActuanteMX"></td>
+                                            <td id="labelMomentoActuanteMY"></td>
+                                            <td id="labelRelacionRecubrimiento"></td>
+                                            <td id="labelCargaAdimensional"></td>
+                                            <td id="labelMomentoUx"></td>
+                                            <td id="labelMomentoUy"></td>
+                                            <td id="labelCondicionalX"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Resultados:</h3>
+
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th colspan="1" scope="col">Condicionales momento adimensional Y</th>
+                                            <th colspan="1" scope="col">Mediatriz Adimensional Am</th>
+                                            <th colspan="1" scope="col">Mediatriz Adimensional Tm</th>
+                                            <th colspan="1" scope="col">Mediatriz Adimensional Bm</th>
+                                            <th colspan="1" scope="col">Diagonal Adimensional Ad</th>
+                                            <th colspan="1" scope="col">Diagonal Adimensional Td</th>
+                                            <th colspan="1" scope="col">Diagonal Adimensional Bd</th>
+                                            <th colspan="1" scope="col">Coeficientes cuantia mínima Adimensional K1</th>
+                                            <th colspan="1" scope="col">Coeficientes cuantia mínima Adimensional K2</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="labelCondicionalY"></td>
+                                            <td id="labelMediatrizAm"></td>
+                                            <td id="labelMediatrizTm"></td>
+                                            <td id="labelMediatrizBm"></td>
+                                            <td id="labelDiagonalAd"></td>
+                                            <td id="labelDiagonalTd"></td>
+                                            <td id="labelDiagonalBd"></td>
+                                            <td id="labelCuantiaK1"></td>
+                                            <td id="labelCuantiaK2"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Resultados:</h3>
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th colspan="1" scope="col">Coeficientes cuantia mínima Adimensional K3</th>
+                                            <th colspan="1" scope="col">Cuantia requerida W</th>
+                                            <th colspan="1" scope="col">Cuantia geometrica P</th>
+                                            <th colspan="1" scope="col">Area refuerzo longitudinal Cm2</th>
+                                            <th colspan="1" scope="col">Separación por norma Cm</th>
+                                            <th colspan="1" scope="col">Area pedestal Cm2</th>
+                                            <th colspan="1" scope="col">Area refuerzo Cm2</th>
+                                            <th colspan="1" scope="col">Area seccion transversal Cm2 Ashx </th>
+                                            <th colspan="1" scope="col">Area seccion transversal Cm2 Ashy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="labelCuantiaK3"></td>
+                                            <td id="labelCuantiaRequerida"></td>
+                                            <td id="labelCuantiaGeometrica"></td>
+                                            <td id="labelAreaRefuerzoLongitudinal"></td>
+                                            <td id="labelSeparacionNorma"></td>
+                                            <td id="labelAreaPedestal"></td>
+                                            <td id="labelAreaRefuerzo"></td>
+                                            <td id="labelSeccionTransversalAshx"></td>
+                                            <td id="labelSeccionTransversalAshy"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <canvas #canvas style="background-color: white" width="862" height="540" id="micanvas"></canvas>
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="btn-group btn-group-lg" role="group" aria-label="...">
+
+                                    <div class="btn-group">
+                                        <button id="" (click)="imprimirElemento()" type="button"
+                                            class="btn btn-info btn-lg">Imprimir</button>
+
+                                        <button id="guardarDatos" (click)="generarPDF()" type="button"
+                                            class="btn btn-warning btn-lg">Guardar</button>
+
+                                        <button id="irResultados" (click)="irResultados()" type="button"
+                                            class="btn btn-success btn-lg">Ver resultados</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

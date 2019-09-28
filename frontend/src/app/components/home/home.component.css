@@ -1,0 +1,44 @@
+.bg-primary {
+    background-color: #343a40!important;
+    color: white!important;
+}
+
+.card-header{
+    background-color: #343a40!important;
+    color: white!important;
+    border-color: white!important;
+    
+}
+
+#div1 {
+    overflow:scroll;
+    height:200px;
+    display: none;
+    /* width:500px; */
+}
+#div1 table {
+   /* width:500px; */
+   background-color:white;
+   text-align: center;
+}
+
+@media (max-width: 600px){
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: .5rem;
+        padding-left: .5rem;
+        width: 100%;
+      }
+    .navbar-expand-md .navbar-toggler {
+        display: block;
+      }
+    .row{
+      text-align: left;
+      width: 100%;
+      }
+      h5{
+       font-size: 19px;
+      }
+      .table td, th{
+          font-size: 10px;
+      }
+    }

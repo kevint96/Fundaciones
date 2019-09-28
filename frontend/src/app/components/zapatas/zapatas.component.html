@@ -1,0 +1,467 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">
+                <h5 align="center">Dimensiones y bases zapata</h5>
+            </div>
+            <div class="card-body">
+                <form #basesForm="ngForm">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="pesoSuelo">Peso suelo: (kg/m3)</label>
+                                <input type="number" class="form-control" id="pesoSuelo" value="{{pesoSuelo}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="pesoConcreto">Peso concreto: (kg/m2)</label>
+                                <input type="number" class="form-control" id="pesoConcreto" value="{{pesoConcreto}}"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="diametroAcero">Area acero: (Cm2)</label>
+                                <input type="number" class="form-control" id="diametroAcero" value="{{diametroAcero}}"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="pesoZapata">Peso especifico concreto (kg):</label>
+                                <input type="number" class="form-control" id="pesoZapata" value="{{pesoZapata}}"
+                                    readonly>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="cargaViva">Carga viva: (Kn)</label>
+                                <input type="number" class="form-control" id="cargaViva" value="{{cargaViva}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="cargaMuerta">Carga muerta: (Kn)</label>
+                                <input type="number" class="form-control" id="cargaMuerta" value="{{cargaMuerta}}"
+                                    readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="cargaAdmisibleSuelo">Carga admisible suelo: (Kg/m2)</label>
+                                <input type="number" class="form-control" id="cargaAdmisibleSuelo"
+                                    value="{{cargaAdmisibleSuelo}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 bg-primary">
+                            <div class="form-group">
+                                <label for="factorMayoracion">Factor mayoracion:</label>
+                                <input type="number" class="form-control" id="factorMayoracion"
+                                    value="{{factorMayoracion}}" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card-body">
+
+
+                    </div>
+                    <!-- [disabled]="habilitado()" -->
+
+                    <!-- <button style="text-align: right;width:220px" type="button" class="btn btn-primary btn-lg" (click)="darListaExcel()">Lista</button> -->
+
+                </form>
+
+                <div class="table-responsive table small" id="div1">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">FX</th>
+                                <th scope="col">FY</th>
+                                <th scope="col">FZ</th>
+                                <th scope="col">MX</th>
+                                <th scope="col">MY</th>
+                                <th scope="col">MZ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td>{{Redondeo(item,2)}}</td>
+                                <td>{{Redondeo(fy[indice],2)}}</td>
+                                <td>{{Redondeo(fz[indice],2)}}</td>
+                                <td>{{Redondeo(mx[indice],2)}}</td>
+                                <td>{{Redondeo(my[indice],2)}}</td>
+                                <td>{{Redondeo(mz[indice],2)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+                <h5 align="center">Datos supuestos por el usuario</h5>
+
+                <!-- <h6 align="center">Es importante considerar que para los datos supuestos por el usuario el espesor escogido 
+                    no debe ser menor a 0,25 metros según el reglamento técnico colombiano NSR-10.</h6> -->
+
+                <div class="table-responsive table small" id="div2">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th scope="col">BX(m)</th>
+                                <th scope="col">BY(m)</th>
+                                <th scope="col">E(m)</th>
+                                <th scope="col">CX(m)</th>
+                                <th scope="col">CY(m)</th>
+                                <th scope="col">H(m)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of fx;let indice=index">
+                                <th scope="row">{{base[indice]}}</th>
+                                <td id="bx" contenteditable></td>
+                                <td contenteditable></td>
+                                <td contenteditable></td>
+                                <td contenteditable></td>
+                                <td contenteditable></td>
+                                <td contenteditable></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="btn-group btn-group-lg" role="group" aria-label="...">
+
+                                <button id="diseñar" type="button" class="btn btn-success btn-lg"
+                                    (click)="myFunction()">Diseñar</button>
+
+                                <!-- [disabled]="habilitado()" -->
+
+                                <button id="limpiar" type="button" class="btn btn-warning btn-lg"
+                                    (click)="limpiar()">Limpiar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+
+                </div>
+
+
+                <div class="table-responsive table small" id="div3">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Base</th>
+                                <th colspan="3" scope="col">Pesos</th>
+                                <th colspan="1" scope="col">Carga vertical</th>
+                                <th colspan="2" scope="col">Momentos actuantes</th>
+                                <th colspan="3" scope="col">Propiedades geograficas zapata</th>
+                                <th colspan="2" scope="col">Esfuerzos actuantes</th>
+                                <th colspan="2" scope="col">Diseño a flexion</th>
+                                <th colspan="2" scope="col">Areas de acero</th>
+                                <th colspan="2" scope="col">Sep. cabillas</th>
+                                <th colspan="3" scope="col">Diseño por corte</th>
+                                <th colspan="2" scope="col">Punzonado</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Zapata</th>
+                                <th scope="col">Pedestal</th>
+                                <th scope="col">Suelo</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">MX</th>
+                                <th scope="col">MY</th>
+                                <th scope="col">A</th>
+                                <th scope="col">IX</th>
+                                <th scope="col">IY</th>
+                                <th scope="col">QMax</th>
+                                <th scope="col">QMin</th>
+                                <th scope="col">Mdx</th>
+                                <th scope="col">Mdy</th>
+                                <th scope="col">Ax</th>
+                                <th scope="col">AY</th>
+                                <th scope="col">Asx</th>
+                                <th scope="col">Asy</th>
+                                <th scope="col">Vx</th>
+                                <th scope="col">Vy</th>
+                                <th scope="col">Vc</th>
+                                <th scope="col">Vpnz</th>
+                                <th scope="col">Vconc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of listaPesoZapata;let indice=index">
+                                <th scope="row"
+                                    [ngClass]='{red : QMax[indice] > cargaAdmisibleSuelo , blue: Vpuz[indice] > Vcon[indice] , green : Vx[indice] > Vc[indice]}'>
+                                    {{base[indice]}}</th>
+                                <td>{{Redondeo(listaPesoZapata[indice],2)}}</td>
+                                <td>{{Redondeo(listaPesoPedestal[indice],2)}}</td>
+                                <td>{{Redondeo(listaPesoSuelo[indice],2)}}</td>
+                                <td>{{Redondeo(listaCargaVertical[indice],2)}}</td>
+                                <td>{{Redondeo(listaMomentoActuanteMX[indice],2)}}</td>
+                                <td>{{Redondeo(listaMomentoActuanteMY[indice],2)}}</td>
+                                <td>{{Redondeo(A[indice],2)}}</td>
+                                <td>{{Redondeo(Lx[indice],2)}}</td>
+                                <td>{{Redondeo(Ly[indice],2)}}</td>
+                                <td
+                                    [ngClass]='{red : QMax[indice] > cargaAdmisibleSuelo, black: !condicionCargaAdmisible}'>
+                                    {{Redondeo(QMax[indice],2)}}</td>
+                                <td>{{Redondeo(QMin[indice],2)}}</td>
+                                <td>{{Redondeo(Mdx[indice],2)}}</td>
+                                <td>{{Redondeo(Mdy[indice],2)}}</td>
+                                <td>{{Redondeo(Ax[indice],2)}}</td>
+                                <td>{{Redondeo(Ay[indice],2)}}</td>
+                                <td>{{Redondeo(Asx[indice],2)}}</td>
+                                <td>{{Redondeo(Asy[indice],2)}}</td>
+                                <td [ngClass]='{red : Vx[indice] > Vc[indice], black: !condicionCorte}'>{{Redondeo(Vx[indice],2)}}
+                                </td>
+                                <td>{{Redondeo(Vy[indice],2)}}</td>
+                                <td>{{Redondeo(Vc[indice],2)}}</td>
+                                <td [ngClass]='{red : Vpuz[indice] > Vcon[indice], black: !condicionPunzonado}'>
+                                    {{Redondeo(Vpuz[indice],2)}}
+                                </td>
+                                <td>{{Redondeo(Vcon[indice],2)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <!-- <button id="generatereport" (click) >Download Report</button> -->
+                    <!-- <button id="generatereport" type="button" class="btn btn-secondary" (click)="prueba()">Download Report</button> -->
+
+                    <!-- <div *ngFor="let item of listaPesoZapata;let indice=index" id="texto">
+                        <p [ngClass]='{red : QMax[indice] > cargaAdmisibleSuelo, black: !condicionCargaAdmisible}'> El valor {{QMax[indice]}} no debe ser mayor a la carga admisible:
+                            {{cargaAdmisibleSuelo}}</p>
+                    </div> -->
+                </div>
+
+
+
+                <!-- <div class="card-body" id="blanco">
+                    <img src="{{imagen1}}" title="ZapataAislada" alt="Zapata aislada">
+                </div> -->
+
+                <div id="blanco">
+
+                    <br>
+
+                    <h5 style="text-align: center; color: black">Seleccione la zapata:</h5>
+
+                    <select id="select" class="browser-default custom-select-sm" name="select" ngModel
+                        (ngModelChange)="animate2()">
+                        <option *ngFor="let item of fx;let indice=index" value="{{indice}}">{{indice + 1}} zapata
+                        </option>
+                    </select>
+
+                    <form id="resultados" style="text-align: left">
+
+                        <br>
+                        <br>
+
+                        <div class="container">
+
+                            <h2 id="numeroZapata" style="text-align: center; color: blue;">zapata</h2>
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Datos iniciales:</h3>
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center;">
+                                <table id="tab" class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Peso Suelo</th>
+                                            <th scope="col">Peso concreto</th>
+                                            <th scope="col">Area acero</th>
+                                            <th scope="col">Peso especifico concreto</th>
+                                            <th scope="col">Carga viva</th>
+                                            <th scope="col">Carga muerta</th>
+                                            <th scope="col">Carga admisible suelo</th>
+                                            <th scope="col">Factor mayoracion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{Redondeo(pesoSuelo,2)}}</td>
+                                            <td>{{Redondeo(pesoConcreto,2)}}</td>
+                                            <td>{{Redondeo(diametroAcero,2)}}</td>
+                                            <td>{{Redondeo(pesoZapata,2)}}</td>
+                                            <td>{{Redondeo(cargaViva,2)}}</td>
+                                            <td>{{Redondeo(cargaMuerta,2)}}</td>
+                                            <td>{{Redondeo(cargaAdmisibleSuelo,2)}}</td>
+                                            <td>{{Redondeo(factorMayoracion,2)}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <div class="container">
+
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Resultados:</h3>
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center">
+                                <table id="tab2" class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Peso zapata</th>
+                                            <th scope="col">Peso pedestal</th>
+                                            <th scope="col">Peso suelo</th>
+                                            <th scope="col">Carga vertical</th>
+                                            <th scope="col">Momento actuante MX</th>
+                                            <th scope="col">Momento actuante MY</th>
+                                            <th scope="col">Propiedad geografica A</th>
+                                            <th scope="col">Propiedad geografica IX</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="labelPesoZapata"></td>
+                                            <td id="labelPesoPedestal"></td>
+                                            <td id="labelPesoSuelo"></td>
+                                            <td id="labelCargaVertical"></td>
+                                            <td id="labelMomentoMX"></td>
+                                            <td id="labelMomentoMY"></td>
+                                            <td id="labelPropiedadA"></td>
+                                            <td id="labelPropiedadIX"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Resultados:</h3>
+
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center">
+                                <table id="tab3" class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Propiedad geografica IY</th>
+                                            <th scope="col">Esfuerzo actuante QMax</th>
+                                            <th scope="col">Esfuerzo actuante QMin</th>
+                                            <th scope="col">Diseño flexion Mdx</th>
+                                            <th scope="col">Diseño flexion Mdy</th>
+                                            <th scope="col">Area acero AX</th>
+                                            <th scope="col">Area acero AY</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="labelPropiedadIY"></td>
+                                            <td id="labelEsfuerzoQMax"></td>
+                                            <td id="labelEsfuerzoQMin"></td>
+                                            <td id="labelDiseñoMdx"></td>
+                                            <td id="labelDiseñoMdy"></td>
+                                            <td id="labelAreaAx"></td>
+                                            <td id="labelAreaAy"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                            <h3 id="nuevo" style="color: blue; text-align: center">Resultados:</h3>
+
+                            <div id="nuevo" class="table-responsive table small" style="text-align: center">
+                                <table id="tab4" class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Sep. cabillas ASX</th>
+                                            <th scope="col">sep. cabillas ASY</th>
+                                            <th scope="col">Diseño por corte VX</th>
+                                            <th scope="col">Diseño por corte VY</th>
+                                            <th scope="col">Diseño por corte VC</th>
+                                            <th scope="col">Punzonado VPNZ</th>
+                                            <th scope="col">Punzonado VCONC</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="labelSepAsx"></td>
+                                            <td id="labelSepAsy"></td>
+                                            <td id="labelDiseñoVx"></td>
+                                            <td id="labelDiseñoVy"></td>
+                                            <td id="labelDiseñoVc"></td>
+                                            <td id="labelPunzonadoVpnz"></td>
+                                            <td id="labelPunzonadoVconc"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <canvas #micanvas style="background-color: white" width="862" height="540" id="micanvas"></canvas>
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="btn-group btn-group-lg" role="group" aria-label="...">
+
+                                    <div class="btn-group">
+                                        <button id="" (click)="imprimirElemento()" type="button"
+                                            class="btn btn-info btn-lg">Imprimir</button>
+
+                                        <button id="" (click)="prueba()" type="button"
+                                            class="btn btn-warning btn-lg">Guardar como Pdf</button>
+
+                                        <!-- <button id="generatereport" type="button" class="btn btn-dark btn-lg"
+                                            (click)="prueba()">Guardar como Pdf</button> -->
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div id="pedestal" style="text-align: center">
+                    <button (click)="irPedestal()" type="button" class="btn btn-success btn-lg">Generar
+                        pedestal-></button>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

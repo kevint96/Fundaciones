@@ -1,0 +1,15 @@
+.jumbotron{
+    background: transparent;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+
+@media (max-width: 600px){
+    .py-3{
+        font-size: small;
+    }
+}
+

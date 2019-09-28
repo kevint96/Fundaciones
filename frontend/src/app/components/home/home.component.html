@@ -1,0 +1,112 @@
+<div class="card text-white">
+    <div class="card-header" align="center">
+        <h5 align="center">Cargue las fuerzas y momentos de ETABS</h5>
+    </div>
+</div>
+
+<!-- <div class="card-header" align="center"> -->
+<!-- <a href="../pdfs/reporte2-05-10.pdf" download="Reporte2Mayo2010">
+        Descargar Archivo
+    </a>
+    <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+        accept=".xlsx"> -->
+<!-- <button type="button" class="btn btn-info" (click)="Upload()">Upload</button> -->
+<!-- </div> -->
+
+<div class="card">
+    <div class="card-body" align="center">
+        <h5 class="card-title" align="center">Lectura de datos desde excel:</h5>
+        <p class="card-text" align="center">Descargue el formato, copie las fuerzas y cargue el nuevo archivo de excel!.
+        </p>
+        <a href="../../../assets/ModeloEtabs.xlsx" download="ModeloEtabs" align="center">
+            Descargar Formato Excel ETABS
+        </a>
+        <br>
+        <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file"
+            accept=".xlsx" align="center">
+
+        <br />
+        <br />
+
+        <div class="col" style="text-align: center">
+            <div class="row">
+                <div class="col" align="center">
+                    <h6 align="center">Lista de cargas etabs:</h6>
+                    <select id="cargas" class="browser-default custom-select-sm" name="cargas" ngModel
+                        style="text-align: center" (ngModelChange)="seleccionarCarga()" align="center">
+                        <option *ngFor="let item of numeroCargas;let indice=index" value="{{indice}}">Carga #
+                            {{indice + 1}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <br />
+        <br />
+
+        <div class="table-responsive table small" id="div1">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Base</th>
+                        <th scope="col">FX</th>
+                        <th scope="col">FY</th>
+                        <th scope="col">FZ</th>
+                        <th scope="col">MX</th>
+                        <th scope="col">MY</th>
+                        <th scope="col">MZ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of fx;let indice=index">
+                        <th scope="row">{{base[indice]}}</th>
+                        <td>{{item}}</td>
+                        <td>{{fy[indice]}}</td>
+                        <td>{{fz[indice]}}</td>
+                        <td>{{mx[indice]}}</td>
+                        <td>{{my[indice]}}</td>
+                        <td>{{mz[indice]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="btn-group" id="GrupoBotonesListaEtabs">
+
+            <button id="zapataAislada" type="button" class="btn btn-primary btn-lg" (click)="irZapata()"
+                [disabled]="this.habilitar">Diseñar
+                Zapata</button>
+
+            <button id="pedestal" type="button" class="btn btn-success btn-lg" (click)="irPedestal()"
+                [disabled]="this.habilitar">Diseñar
+                Pedestal</button>
+        </div>
+
+        <br />
+        <br />
+            <h6 align="center" id="mensaje" style="color: red" style="display: none"></h6>
+        <br />
+        <br />
+
+
+
+
+        <!-- <div id="datosPersona">
+            <table id="Table" class="table table-bordered table-dark" style="text-align:center;"></table>
+        </div> -->
+    </div>
+
+    <!-- el dato 1 es: {{dato1}}<br>
+    pesoSuelo: {{pesoSuelo}}<br>
+    pesoConcreto: {{pesoConcreto}}<br>
+    diametroAcero: {{diametroAcero}}<br>
+    pesoZapata: {{pesoZapata}}<br>
+    cargaViva: {{cargaViva}}<br>
+    cargaMuerta: {{cargaMuerta}}<br>
+    cargaAdmisibleSuelo: {{cargaAdmisibleSuelo}}<br>
+    factorMayoracion: {{factorMayoracion}}<br>
+    factorMayoracionUsuario: {{factorMayoracionUsuario}}<br> -->

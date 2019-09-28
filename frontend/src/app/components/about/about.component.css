@@ -1,0 +1,46 @@
+.bg-primary {
+    background-color: #343a40!important;
+    color: white!important;
+}
+
+.card-header{
+    background-color: #343a40!important;
+    color: white!important;
+    border-color: white!important;
+}
+
+.form-control.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+
+.alert{
+    text-align: center;
+}
+
+.bg-primary{
+    border-color: white;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+@media (max-width: 600px){
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: .5rem;
+        padding-left: .5rem;
+        width: 100%;
+      }
+    .navbar-expand-md .navbar-toggler {
+        display: block;
+      }
+    .row{
+      text-align: left;
+      width: 100%;
+      margin-left: 0px;
+      }
+      .form-control{
+        display: block;
+        width: 100%;
+      }
+    }
